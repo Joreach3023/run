@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RunPacer - Coach de course</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js');
+    }
+  </script>
+</head>
+<body>
+  <header>
+    <h1>RunPacer</h1>
+    <p id="header-objective">Objectif: 4:00 min/km</p>
+  </header>
+
+  <nav>
+    <button id="nav-plan" class="active">Plan</button>
+    <button id="nav-run">Courir</button>
+    <button id="nav-stats">Stats</button>
+    <button id="nav-profile">Profil</button>
+  </nav>
+
+  <main class="container">
+    <section id="plan-section" class="section active">
+      <h2>Plan d'entraînement</h2>
+      <table id="plan-table">
+        <thead>
+          <tr><th>Date</th><th>Type</th><th>Distance</th><th>Rythme</th><th>Action</th></tr>
+        </thead>
+        <tbody id="plan-body"></tbody>
+      </table>
+    </section>
+
+    <section id="run-section" class="section">
+      <h2>Suivi en direct</h2>
+      <div id="run-info">
+        <p>Temps: <span id="run-time">00:00</span></p>
+        <p>Distance: <span id="run-distance">0.00</span> km</p>
+        <p>Rythme actuel: <span id="run-pace">--:--</span> min/km</p>
+      </div>
+      <div id="map" style="height: 300px;"></div>
+      <button id="stop-run-btn" disabled>Terminer la course</button>
+    </section>
+
+    <section id="stats-section" class="section">
+      <h2>Historique</h2>
+      <ul id="history-list"></ul>
+    </section>
+
+    <section id="profile-section" class="section">
+      <h2>Profil</h2>
+      <form id="profile-form">
+        <label for="current-pace">Rythme actuel (min/km):</label>
+        <input type="text" id="current-pace" value="4:36">
+        <label for="target-pace">Objectif (min/km):</label>
+        <input type="text" id="target-pace" value="4:00">
+        <label for="event-date">Date de l'événement:</label>
+        <input type="date" id="event-date" value="2025-06-07">
+        <button type="submit">Mettre à jour</button>
+      </form>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
